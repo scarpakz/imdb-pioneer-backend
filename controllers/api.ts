@@ -1,5 +1,6 @@
 import config from "../config";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import API_URL from '../constant'
 
 /**
  * Get all movies
@@ -8,24 +9,13 @@ import axios from "axios";
  */
 export const getMovies = async (req:any, res: any) => {
     try {
+        // undefined by default
         const search = req.query.s
-        axios.get(`http://www.omdbapi.com/?s=${search}&apikey=${config.apiKey}`)
-        .then((response) => {
+
+        axios.get(`${API_URL.API_URL}?s=${search}&apikey=${config.apiKey}`)
+        .then((response: AxiosResponse) => {
             res.json(response.data)
         })
-    } catch(err: any) {
-        res.status(400).send(err.message);
-    }
-}
-
-/**
- * Get all movies by title
- * @param req 
- * @param res 
- */
-export const getMoviesByTitle = async (req: any, res: any) => {
-    try {
-
     } catch(err: any) {
         res.status(400).send(err.message);
     }
