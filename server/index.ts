@@ -1,18 +1,18 @@
 import express from 'express';
 import cors from 'cors';
 import config from '../config';
+import router from '../routes/route'
 
 const app = express();
-const routes = express.Router();
 
 app.use(cors());
 app.use(express.json());
 
 //Routes
-app.use('/api', routes)
+app.use('/api/v1/', router)
 
 const server = app.listen(config.port, () => {
     console.log(`Server is live: ${config.hostUrl}`)
 })
 
-export default server
+export default server;
