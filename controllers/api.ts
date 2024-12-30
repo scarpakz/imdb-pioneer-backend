@@ -1,6 +1,11 @@
 import config from "../config";
 import axios, { AxiosResponse } from "axios";
-import API_URL from '../constant'
+import {
+    API_URL
+} from '../constant'
+import {
+    MovieDetails
+} from '../types'
 
 /**
  * Get all movies
@@ -12,7 +17,7 @@ export const getMovies = async (req:any, res: any) => {
         // undefined by default
         const title = req.query.title
 
-        axios.get(`${API_URL.API_URL}?s=${title}&apikey=${config.apiKey}`)
+        axios.get(`${API_URL}?s=${title}&apikey=${config.apiKey}`)
         .then((response: AxiosResponse) => {
             res.json(response.data)
         })
@@ -30,9 +35,10 @@ export const getMoviesById = async (req: any, res: any) => {
     try {
         const id = req.params.id
 
-        axios.get(`${API_URL.API_URL}?i=${id}&apikey=${config.apiKey}`)
+        axios.get(`${API_URL}?i=${id}&apikey=${config.apiKey}`)
         .then((response: AxiosResponse) => {
-            res.json(response.data)
+            const results: MovieDetails = response.data
+            res.json(results)
         })
     } catch(err: any) {
         res.status(400).send(err.message);
