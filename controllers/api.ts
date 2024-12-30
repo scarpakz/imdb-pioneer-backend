@@ -2,10 +2,11 @@ import config from "../config";
 import axios, { AxiosResponse } from "axios";
 import {
     API_URL
-} from '../constant'
+} from '../constant/constant'
 import {
-    MovieDetails
-} from '../types'
+    TypeMovieDetails,
+    TypeSearch
+} from '../constant/types'
 
 /**
  * Get all movies
@@ -19,7 +20,8 @@ export const getMovies = async (req:any, res: any) => {
 
         axios.get(`${API_URL}?s=${title}&apikey=${config.apiKey}`)
         .then((response: AxiosResponse) => {
-            res.json(response.data)
+            const results: TypeSearch = response.data
+            res.json(results)
         })
     } catch(err: any) {
         res.status(400).send(err.message);
@@ -37,7 +39,7 @@ export const getMoviesById = async (req: any, res: any) => {
 
         axios.get(`${API_URL}?i=${id}&apikey=${config.apiKey}`)
         .then((response: AxiosResponse) => {
-            const results: MovieDetails = response.data
+            const results: TypeMovieDetails = response.data
             res.json(results)
         })
     } catch(err: any) {

@@ -1,9 +1,9 @@
-interface Rating {
+interface TypeRating {
     Source: string;
     Value: string;
 }
 
-export interface MovieDetails {
+export interface TypeMovieDetails {
     Title: string;
     Year: string;
     Rated: string;
@@ -18,7 +18,7 @@ export interface MovieDetails {
     Country: string;
     Awards: string;
     Poster: string;
-    Ratings: Rating[];
+    Ratings: TypeRating[];
     Metascore: string;
     imdbRating: string;
     imdbVotes: string;
@@ -29,4 +29,12 @@ export interface MovieDetails {
     Production: string;
     Website: string;
     Response: string;
+}
+
+export interface TypeSearch {
+    Title: string;
+    Year: string;
+    imdbID: string;
+    Type: string;
+    Poster: string;
 }
