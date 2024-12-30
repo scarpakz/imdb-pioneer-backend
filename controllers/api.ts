@@ -10,9 +10,9 @@ import API_URL from '../constant'
 export const getMovies = async (req:any, res: any) => {
     try {
         // undefined by default
-        const search = req.query.s
+        const title = req.query.title
 
-        axios.get(`${API_URL.API_URL}?s=${search}&apikey=${config.apiKey}`)
+        axios.get(`${API_URL.API_URL}?s=${title}&apikey=${config.apiKey}`)
         .then((response: AxiosResponse) => {
             res.json(response.data)
         })
@@ -28,7 +28,12 @@ export const getMovies = async (req:any, res: any) => {
  */
 export const getMoviesById = async (req: any, res: any) => {
     try {
+        const id = req.params.id
 
+        axios.get(`${API_URL.API_URL}?i=${id}&apikey=${config.apiKey}`)
+        .then((response: AxiosResponse) => {
+            res.json(response.data)
+        })
     } catch(err: any) {
         res.status(400).send(err.message);
     }
